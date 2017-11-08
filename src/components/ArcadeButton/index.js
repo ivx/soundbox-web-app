@@ -10,13 +10,15 @@ class ArcadeButton extends Component {
     const classNames = classnames('arcade-button');
 
     return (
-      <button
-        className={classNames}
-        onClick={this.handleClick}
-        id={`btn_${this.props.id}`}
-      >
-        {this.children}
-      </button>
+      <div className="outer-button">
+        <button
+          className={classNames}
+          onClick={this.handleClick}
+          id={`btn_${this.props.id}`}
+        >
+          {this.props.children}
+        </button>
+      </div>
     );
   }
 }

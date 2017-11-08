@@ -8,7 +8,7 @@ class App extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = { shift: false };
   }
 
   componentDidMount() {
@@ -22,13 +22,14 @@ class App extends Component {
     this.channel
       .join()
       .receive('ok', response => {
-        console.log('joined');
+        console.log('joined', response);
       })
       .receive('error', response => {
         console.log('error');
       });
 
     this.channel.push('get_buttons', {}).receive('ok', message => {
+      console.log(message.data);
       this.handleButtonsReceived(message.data);
     });
   }
@@ -48,21 +49,39 @@ class App extends Component {
     this.channel.push('push_button', { id });
   };
 
+  handlePressShift = () => {
+    this.setState(prevState => ({
+      ...prevState,
+      shift: !prevState.shift,
+    }));
+  };
+
   renderButtons = () => {
     if (!this.state.button_set_0) return null;
     return this.state.button_set_0.map(button => (
       <ArcadeButton
         id={button.id}
-        handlePress={this.handlePressButton}
         key={button.id}
+        handlePress={this.handlePressButton}
       >
-        {button.name}
+        {button.title}
       </ArcadeButton>
     ));
   };
 
   render() {
-    return <div className="App">{this.renderButtons()}</div>;
+    return (
+      <div className="App">
+        {this.renderButtons()}
+        <ArcadeButton
+          id="btn_shift"
+          key="btn_shift"
+          handlePress={this.handlePressShift}
+        >
+          Shift
+        </ArcadeButton>
+      </div>
+    );
   }
 }
 
