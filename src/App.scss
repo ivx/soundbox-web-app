@@ -1,11 +1,22 @@
 @import './components/ArcadeButton/ArcadeButton.scss';
 
 body {
-  margin: 0;
+  margin: 5rem;
   padding: 0;
   font-family: sans-serif;
+  background: url('./devcon7_bg.png');
 }
 
 .App {
   text-align: center;
+
+  img {
+    margin-bottom: 5rem;
+  }
+
+  .button-row {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+  }
 }

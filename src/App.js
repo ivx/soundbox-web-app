@@ -35,13 +35,17 @@ class App extends Component {
   }
 
   handleButtonsReceived = buttons => {
-    const button_set_0 = buttons.splice(0, 10);
-    const button_set_1 = buttons;
+    const button_set_0_0 = buttons.splice(0, 5);
+    const button_set_0_1 = buttons.splice(0, 5);
+    const button_set_1_0 = buttons.splice(0, 5);
+    const button_set_1_1 = buttons;
 
     this.setState(prevState => ({
       ...prevState,
-      button_set_0: button_set_0,
-      button_set_1: button_set_1,
+      button_set_0_0: button_set_0_0,
+      button_set_0_1: button_set_0_1,
+      button_set_1_0: button_set_1_0,
+      button_set_1_1: button_set_1_1,
     }));
   };
 
@@ -56,30 +60,52 @@ class App extends Component {
     }));
   };
 
-  renderButtons = () => {
-    if (!this.state.button_set_0) return null;
-    return this.state.button_set_0.map(button => (
+  renderButtonRow = buttons => {
+    return buttons.map(button => (
       <ArcadeButton
-        id={button.id}
+        btn_id={button.id}
         key={button.id}
         handlePress={this.handlePressButton}
       >
-        {button.title}
+        {button.title.substr(0, 10)}
       </ArcadeButton>
     ));
+  };
+
+  renderButtons = () => {
+    if (!this.state.button_set_0_0) return null;
+
+    const row_1 = this.state.shift
+      ? this.state.button_set_1_0
+      : this.state.button_set_0_0;
+    const row_2 = this.state.shift
+      ? this.state.button_set_1_1
+      : this.state.button_set_0_1;
+
+    return [
+      <div className="button-row" key="button-row-1">
+        {this.renderButtonRow(row_1)}
+      </div>,
+      <div className="button-row" key="button-row-2">
+        <ArcadeButton
+          btn_id="shift"
+          key="btn_shift"
+          active={this.state.shift}
+          handlePress={this.handlePressShift}
+        >
+          Shift
+        </ArcadeButton>
+
+        {this.renderButtonRow(row_2)}
+      </div>,
+    ];
   };
 
   render() {
     return (
       <div className="App">
+        <img src="devcon7_logo.svg" />
         {this.renderButtons()}
-        <ArcadeButton
-          id="btn_shift"
-          key="btn_shift"
-          handlePress={this.handlePressShift}
-        >
-          Shift
-        </ArcadeButton>
       </div>
     );
   }

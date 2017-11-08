@@ -3,22 +3,22 @@ import classnames from 'classnames';
 
 class ArcadeButton extends Component {
   handleClick = () => {
-    this.props.handlePress(this.props.id);
+    this.props.handlePress(this.props.btn_id);
   };
 
   render() {
-    const classNames = classnames('arcade-button');
+    const classNames = classnames('arcade-button', {
+      active: this.props.active,
+    });
 
     return (
-      <div className="outer-button">
-        <button
-          className={classNames}
-          onClick={this.handleClick}
-          id={`btn_${this.props.id}`}
-        >
-          {this.props.children}
-        </button>
-      </div>
+      <button
+        className={classNames}
+        onClick={this.handleClick}
+        id={`btn_${this.props.btn_id}`}
+      >
+        {this.props.children}
+      </button>
     );
   }
 }
