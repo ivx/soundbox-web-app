@@ -19,27 +19,27 @@ wss.on('connection', ws => {
       case 'PRESS_BUTTON':
         console.log(
           `Button ${action.payload.id} was pressed :O`,
-          action.payload
+          action.payload,
         );
 
         // Respond
         ws.send(
           JSON.stringify({
-            type: 'BUTTON_PRESSED_SUCCESS'
-          })
+            type: 'BUTTON_PRESSED_SUCCESS',
+          }),
         );
         break;
       case 'EDIT_BUTTON':
         console.log(
           `Button ${action.payload.id} was edited :O`,
-          action.payload
+          action.payload,
         );
 
         // Respond
         ws.send(
           JSON.stringify({
-            type: 'BUTTON_EDIT_SUCCESS'
-          })
+            type: 'BUTTON_EDIT_SUCCESS',
+          }),
         );
         break;
     }
@@ -49,6 +49,7 @@ wss.on('connection', ws => {
     JSON.stringify({
       type: 'GET_BUTTONS',
       payload: [
+        { id: '0', title: 'Button 1', sound: 'url-to-button0' },
         { id: '1', title: 'Button 2', sound: 'url-to-button1' },
         { id: '2', title: 'Button 3', sound: 'url-to-button2' },
         { id: '3', title: 'Button 4', sound: 'url-to-button3' },
@@ -67,9 +68,9 @@ wss.on('connection', ws => {
         { id: '16', title: 'Button 17', sound: 'url-to-button16' },
         { id: '17', title: 'Button 18', sound: 'url-to-button17' },
         { id: '18', title: 'Button 19', sound: 'url-to-button18' },
-        { id: '19', title: 'Button 20', sound: 'url-to-button19' }
-      ]
-    })
+        { id: '19', title: 'Button 20', sound: 'url-to-button19' },
+      ],
+    }),
   );
 });
 
