@@ -11,6 +11,14 @@ class App extends Component {
     this.state = { shift: false };
   }
 
+  keyDownListener({ keyCode }) {
+    if (keyCode === 16) {
+      this.handlePressShift();
+    } else if (keyCode > 47 && keyCode < 58) {
+      this.handlePressButton(this.state.shift ? keyCode - 38 : keyCode - 48);
+    }
+  }
+
   componentDidMount() {
     this.setState();
 
@@ -32,8 +40,10 @@ class App extends Component {
       console.log(message.data);
       this.handleButtonsReceived(message.data);
     });
+    
+    document.addEventListener('keydown', this.keyDownListener.bind(this));
   }
-
+  
   handleButtonsReceived = buttons => {
     const button_set_0_0 = buttons.splice(0, 5);
     const button_set_0_1 = buttons.splice(0, 5);
