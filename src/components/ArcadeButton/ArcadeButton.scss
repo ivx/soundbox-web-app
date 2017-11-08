@@ -1,25 +1,23 @@
 .arcade-button {
   display: inline-block;
-  margin: 25px;
+  margin: 45px;
   border: none;
-  border-radius: 50%;
   width: 10rem;
   height: 10rem;
-  background: url('./components/ArcadeButton/default.svg') no-repeat top left;
+  background: url('./components/ArcadeButton/default.png') no-repeat;
   background-size: cover;
   color: #fff;
   outline: none;
-  box-shadow: 0px 5px 5px #000;
 
   &:active {
-    background-image: url('./components/ArcadeButton/default_active.svg');
+    background-image: url('./components/ArcadeButton/default_active.png');
   }
 
   &#btn_shift {
-    background-image: url('./components/ArcadeButton/shift_default.svg');
+    background-image: url('./components/ArcadeButton/shift_default.png');
 
     &.active {
-      background-image: url('./components/ArcadeButton/shift_active.svg');
+      background-image: url('./components/ArcadeButton/shift_active.png');
     }
   }
 }
