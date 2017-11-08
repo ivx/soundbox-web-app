@@ -1,5 +1,10 @@
 @import './components/ArcadeButton/ArcadeButton.scss';
 
+@font-face {
+  font-family: 'Impact Label';
+  src: url('./impact_label_reversed-webfont.woff') format('woff');
+}
+
 body {
   margin: 5rem;
   padding: 0;

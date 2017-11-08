@@ -1,6 +1,9 @@
+.button-wrapper {
+  max-width: 10rem;
+  margin: 1.5rem 3rem;
+}
 .arcade-button {
   display: inline-block;
-  margin: 45px;
   border: none;
   width: 10rem;
   height: 10rem;
@@ -8,6 +11,7 @@
   background-size: cover;
   color: #fff;
   outline: none;
+  margin-bottom: 1.5rem;
 
   &:active {
     background-image: url('./components/ArcadeButton/default_active.png');
@@ -20,4 +24,15 @@
       background-image: url('./components/ArcadeButton/shift_active.png');
     }
   }
+}
+
+.button-label {
+  font-family: 'Impact Label', sans-serif;
+  background-color: #000000;
+  color: #fff;
+  font-size: 2rem;
+  line-height: 1.2;
+  text-align: center;
+  word-wrap: break-word;
+  box-shadow: 0.75ch 0 0 0 #000000, -0.75ch 0 0 0 #000000;
 }
