@@ -55,7 +55,9 @@ class App extends Component {
         id={button.id}
         handlePress={this.handlePressButton}
         key={button.id}
-      />
+      >
+        {button.name}
+      </ArcadeButton>
     ));
   };
 

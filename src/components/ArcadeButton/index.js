@@ -15,7 +15,7 @@ class ArcadeButton extends Component {
         onClick={this.handleClick}
         id={`btn_${this.props.id}`}
       >
-        ArcadeButton
+        {this.children}
       </button>
     );
   }
