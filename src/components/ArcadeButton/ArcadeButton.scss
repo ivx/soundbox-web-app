@@ -1,0 +1,11 @@
+.arcade-button {
+  border: 1px solid red;
+
+  &:hover {
+    border: 1px solid green;
+  }
+
+  &:active {
+    border: 5px solid green;
+  }
+}
