@@ -22,7 +22,7 @@ class App extends Component {
   componentDidMount() {
     this.setState();
 
-    const socket = new Socket('ws://soundbox.world.domination:4000/socket');
+    const socket = new Socket('ws://soundbox.world.domination/socket');
 
     socket.connect();
 
