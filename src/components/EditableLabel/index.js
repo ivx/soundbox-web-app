@@ -40,9 +40,8 @@ class EditableLabel extends Component {
     if (event.keyCode === 13) {
       this.props.onLabelChange(this.state.text);
       this.changeEditing(false);
-    } else if (event.keyCode === 16) {
-      event.stopPropagation();
-    }
+    } 
+    event.stopPropagation();
   }
 
   render() {
