@@ -21,7 +21,7 @@ class ArcadeButton extends Component {
         this.props.handleUpload(
           reader.result.split(',')[1],
           this.props.btn_id,
-          file.name.slice(0, -4),
+          file.name.slice(0, -4)
         );
       };
     }
@@ -29,17 +29,19 @@ class ArcadeButton extends Component {
 
   render() {
     const classNames = classnames('arcade-button', {
-      active: this.props.active,
+      active: this.props.active
     });
 
     return (
       <div className="button-wrapper">
         {this.props.isShift ? (
-          <button
-            className={classNames}
-            onClick={this.handleClick}
-            id={`btn_${this.props.btn_id}`}
-          />
+          <div className="dropzone">
+            <button
+              className={classNames}
+              onClick={this.handleClick}
+              id={`btn_${this.props.btn_id}`}
+            />
+          </div>
         ) : (
           <Dropzone
             disableClick
