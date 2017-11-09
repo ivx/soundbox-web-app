@@ -21,7 +21,7 @@ class ArcadeButton extends Component {
         this.props.handleUpload(
           reader.result.split(',')[1],
           this.props.btn_id,
-          file.name,
+          file.name.slice(0, -4),
         );
       };
     }
