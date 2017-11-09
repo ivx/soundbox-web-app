@@ -114,7 +114,7 @@ class App extends Component {
         handlePress={this.handlePressButton}
         handleUpload={this.handleSoundUpload}
       >
-        {button.title}
+        {button.title.substr(0, 25)}
       </ArcadeButton>
     ));
   };
