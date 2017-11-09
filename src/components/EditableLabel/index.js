@@ -17,7 +17,7 @@ class EditableLabel extends Component {
   }
 
   handleClick = () => {
-    if (this.props.editable) this.changeEditing(true);
+    if (this.props.editable && !this.props.help) this.changeEditing(true);
   };
 
   handleChange = (e) => {
