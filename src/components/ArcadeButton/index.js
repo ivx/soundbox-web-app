@@ -34,19 +34,27 @@ class ArcadeButton extends Component {
 
     return (
       <div className="button-wrapper">
-        <Dropzone
-          disableClick
-          accept="audio/mp3"
-          onDrop={this.handleFileUpload}
-          className="dropzone"
-          activeClassName="dropzone-active"
-        >
+        {this.props.isShift ? (
           <button
             className={classNames}
             onClick={this.handleClick}
             id={`btn_${this.props.btn_id}`}
           />
-        </Dropzone>
+        ) : (
+          <Dropzone
+            disableClick
+            accept="audio/mp3"
+            onDrop={this.handleFileUpload}
+            className="dropzone"
+            activeClassName="dropzone-active"
+          >
+            <button
+              className={classNames}
+              onClick={this.handleClick}
+              id={`btn_${this.props.btn_id}`}
+            />
+          </Dropzone>
+        )}
         <div style={{ transform: `rotate(${this.labelRotation}deg)` }}>
           <span className="button-label">{this.props.children}</span>
         </div>

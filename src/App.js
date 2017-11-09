@@ -114,6 +114,7 @@ class App extends Component {
           key="btn_shift"
           active={this.state.shift}
           handlePress={this.handlePressShift}
+          isShift
         >
           Shift
         </ArcadeButton>
