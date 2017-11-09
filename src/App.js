@@ -8,7 +8,10 @@ class App extends Component {
 
   constructor(props) {
     super(props);
-    this.state = { shift: false };
+    this.state = { 
+      shift: false,
+      help: false
+    };
   }
 
   handleKeyDown({ keyCode }) {
@@ -16,6 +19,20 @@ class App extends Component {
       this.handlePressShift();
     } else if (keyCode > 47 && keyCode < 58) {
       this.handlePressButton(this.state.shift ? keyCode - 38 : keyCode - 48);
+    } else if (keyCode === 72) {
+      this.setState(prevState => ({
+        ...prevState,
+        help: true,
+      }));
+    }
+  }
+
+  handleKeyUp({ keyCode }) {
+    if (keyCode === 72) {
+      this.setState(prevState => ({
+        ...prevState,
+        help: false,
+      }));
     }
   }
 
@@ -117,6 +134,7 @@ class App extends Component {
         handleUpload={this.handleSoundUpload}
         handleLabelChange={this.handleLabelChange}
         label={button.title.substr(0, 25)}
+        help={this.state.help}
       />
     ));
   };
@@ -151,7 +169,12 @@ class App extends Component {
 
   render() {
     return (
-      <div className="App" onKeyDown={this.handleKeyDown.bind(this)} tabIndex={0}>
+      <div 
+        className="App" 
+        onKeyDown={this.handleKeyDown.bind(this)} 
+        onKeyUp={this.handleKeyUp.bind(this)}
+        tabIndex={0}
+      >
         <img src="devcon7_logo.svg" />
         {this.renderButtons()}
       </div>

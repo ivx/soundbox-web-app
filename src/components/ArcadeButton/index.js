@@ -65,6 +65,8 @@ class ArcadeButton extends Component {
         )}
         <EditableLabel
           text={this.props.label}
+          help={this.props.help}
+          btn_id={this.props.btn_id}
           onLabelChange={this.handleLabelChange}
           editable={!this.props.isShift}
           labelRotation={this.labelRotation}
