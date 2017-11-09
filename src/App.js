@@ -40,15 +40,15 @@ class App extends Component {
       console.log(message.data);
       this.handleButtonsReceived(message.data);
     });
-    
+
     document.addEventListener('keydown', this.keyDownListener.bind(this));
   }
-  
+
   handleSoundUpload = (file, btn_id, btn_title) => {
     this.channel
-      .push("upload_sound", { id: btn_id, title: btn_title, file })
-      .receive("ok", () => {
-        this.channel.push("get_buttons", {}).receive("ok", message => {
+      .push('upload_sound', { id: btn_id, title: btn_title, file })
+      .receive('ok', () => {
+        this.channel.push('get_buttons', {}).receive('ok', message => {
           console.log(message.data);
           this.handleButtonsReceived(message.data);
         });
@@ -56,10 +56,38 @@ class App extends Component {
   };
 
   handleButtonsReceived = buttons => {
-    const button_set_0_0 = buttons.splice(0, 5);
-    const button_set_0_1 = buttons.splice(0, 5);
-    const button_set_1_0 = buttons.splice(0, 5);
-    const button_set_1_1 = buttons;
+    const button_set_0_0 = [];
+    button_set_0_0.push(
+      buttons[9],
+      buttons[7],
+      buttons[5],
+      buttons[3],
+      buttons[1],
+    );
+    const button_set_0_1 = [];
+    button_set_0_1.push(
+      buttons[8],
+      buttons[6],
+      buttons[4],
+      buttons[2],
+      buttons[0],
+    );
+    const button_set_1_0 = [];
+    button_set_1_0.push(
+      buttons[19],
+      buttons[17],
+      buttons[15],
+      buttons[13],
+      buttons[11],
+    );
+    const button_set_1_1 = [];
+    button_set_1_1.push(
+      buttons[18],
+      buttons[16],
+      buttons[14],
+      buttons[12],
+      buttons[10],
+    );
 
     this.setState(prevState => ({
       ...prevState,
