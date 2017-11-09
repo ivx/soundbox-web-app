@@ -46,7 +46,8 @@ class ArcadeButton extends Component {
             accept="audio/mp3"
             onDrop={this.handleFileUpload}
             className="dropzone"
-            activeClassName="dropzone-active"
+            acceptClassName="dropzone-accept"
+            rejectClassName="dropzone-reject"
           >
             <button
               className={classNames}

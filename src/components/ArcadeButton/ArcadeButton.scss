@@ -1,16 +1,22 @@
 .button-wrapper {
-  max-width: 10rem;
+  width: 10rem;
+  height: 13rem;
   margin: 1.5rem 3rem;
 }
 
 .dropzone {
 }
 
-.dropzone-active {
-  border-style: dashed;
-  border-color: rgb(102, 102, 102);
-  border-width: 2px;
-  border-radius: 0.2rem;
+.dropzone-accept {
+  background: url('./components/ArcadeButton/splash_accept.png') no-repeat;
+  background-size: cover;
+  background-position: -4px -44px;
+}
+
+.dropzone-reject {
+  background: url('./components/ArcadeButton/splash_reject.png') no-repeat;
+  background-size: cover;
+  background-position: 0px -65px;
 }
 
 .arcade-button {
