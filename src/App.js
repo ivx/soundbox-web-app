@@ -44,6 +44,17 @@ class App extends Component {
     document.addEventListener('keydown', this.keyDownListener.bind(this));
   }
   
+  handleSoundUpload = (file, btn_id, btn_title) => {
+    this.channel
+      .push("upload_sound", { id: btn_id, title: btn_title, file })
+      .receive("ok", () => {
+        this.channel.push("get_buttons", {}).receive("ok", message => {
+          console.log(message.data);
+          this.handleButtonsReceived(message.data);
+        });
+      });
+  };
+
   handleButtonsReceived = buttons => {
     const button_set_0_0 = buttons.splice(0, 5);
     const button_set_0_1 = buttons.splice(0, 5);
@@ -76,6 +87,7 @@ class App extends Component {
         btn_id={button.id}
         key={button.id}
         handlePress={this.handlePressButton}
+        handleUpload={this.handleSoundUpload}
       >
         {button.title.substr(0, 10)}
       </ArcadeButton>
