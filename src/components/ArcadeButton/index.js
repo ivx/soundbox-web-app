@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import classnames from 'classnames';
 import Dropzone from 'react-dropzone';
+import EditableLabel from '../EditableLabel'
 
 class ArcadeButton extends Component {
   constructor(props) {
@@ -11,6 +12,10 @@ class ArcadeButton extends Component {
   handleClick = () => {
     this.props.handlePress(this.props.btn_id);
   };
+
+  handleLabelChange = text => {
+    this.props.handleLabelChange(this.props.btn_id, text);
+  }
 
   handleFileUpload = files => {
     if (files.length > 0) {
@@ -55,9 +60,11 @@ class ArcadeButton extends Component {
             />
           </Dropzone>
         )}
-        <div style={{ transform: `rotate(${this.labelRotation}deg)` }}>
-          <span className="button-label">{this.props.children}</span>
-        </div>
+        <EditableLabel 
+          text={this.props.label} 
+          onLabelChange={this.handleLabelChange} 
+          editable={!this.props.isShift}
+        />
       </div>
     );
   }

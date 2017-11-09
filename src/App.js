@@ -48,6 +48,10 @@ class App extends Component {
     document.addEventListener('keydown', this.keyDownListener.bind(this));
   }
 
+  handleLabelChange = (id, title) => {
+    this.channel.push('edit_button', { id, title })
+  }
+
   handleSoundUpload = (file, btn_id, btn_title) => {
     this.channel.push('upload_sound', { id: btn_id, title: btn_title, file })
   };
@@ -113,9 +117,9 @@ class App extends Component {
         key={button.id}
         handlePress={this.handlePressButton}
         handleUpload={this.handleSoundUpload}
-      >
-        {button.title.substr(0, 25)}
-      </ArcadeButton>
+        handleLabelChange={this.handleLabelChange}
+        label={button.title.substr(0, 25)}
+      />
     ));
   };
 
@@ -139,11 +143,9 @@ class App extends Component {
           key="btn_shift"
           active={this.state.shift}
           handlePress={this.handlePressShift}
+          label='Shift'
           isShift
-        >
-          Shift
-        </ArcadeButton>
-
+        />
         {this.renderButtonRow(row_2)}
       </div>,
     ];
