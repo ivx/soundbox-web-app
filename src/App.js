@@ -35,6 +35,10 @@ class App extends Component {
       .receive('error', response => {
         console.log('error');
       });
+    
+    this.channel.on("buttons_updated", message => 
+      this.handleButtonsReceived(message.data) 
+    )
 
     this.channel.push('get_buttons', {}).receive('ok', message => {
       console.log(message.data);
@@ -45,14 +49,7 @@ class App extends Component {
   }
 
   handleSoundUpload = (file, btn_id, btn_title) => {
-    this.channel
-      .push('upload_sound', { id: btn_id, title: btn_title, file })
-      .receive('ok', () => {
-        this.channel.push('get_buttons', {}).receive('ok', message => {
-          console.log(message.data);
-          this.handleButtonsReceived(message.data);
-        });
-      });
+    this.channel.push('upload_sound', { id: btn_id, title: btn_title, file })
   };
 
   handleButtonsReceived = buttons => {
