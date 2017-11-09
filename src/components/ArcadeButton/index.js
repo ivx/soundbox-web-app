@@ -21,7 +21,7 @@ class ArcadeButton extends Component {
         this.props.handleUpload(
           reader.result.split(',')[1],
           this.props.btn_id,
-          file.name
+          file.name,
         );
       };
     }
@@ -29,25 +29,27 @@ class ArcadeButton extends Component {
 
   render() {
     const classNames = classnames('arcade-button', {
-      active: this.props.active
+      active: this.props.active,
     });
 
     return (
-      <div className='button-wrapper'>
+      <div className="button-wrapper">
         <Dropzone
           disableClick
-          accept='audio/mp3'
+          accept="audio/mp3"
           onDrop={this.handleFileUpload}
+          className="dropzone"
+          activeClassName="dropzone-active"
         >
           <button
             className={classNames}
             onClick={this.handleClick}
             id={`btn_${this.props.btn_id}`}
           />
-          <div style={{ transform: `rotate(${this.labelRotation}deg)` }}>
-            <span className='button-label'>{this.props.children}</span>
-          </div>
         </Dropzone>
+        <div style={{ transform: `rotate(${this.labelRotation}deg)` }}>
+          <span className="button-label">{this.props.children}</span>
+        </div>
       </div>
     );
   }
