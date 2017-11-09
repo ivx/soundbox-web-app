@@ -56,7 +56,7 @@ class EditableLabel extends Component {
       />
     );
     return (
-      <div onClick={this.handleClick} style={{ transform: `rotate(${this.labelRotation}deg)` }}>
+      <div onClick={this.handleClick} style={{ transform: `rotate(${this.props.labelRotation}deg)` }}>
         <span className="button-label">{this.state.text}</span>
       </div>
     );
