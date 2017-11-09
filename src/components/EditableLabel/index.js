@@ -36,10 +36,12 @@ class EditableLabel extends Component {
     }));
   }
 
-  handleKeyDown = ({ keyCode }) => {
-    if (keyCode === 13) {
+  handleKeyDown = (event) => {
+    if (event.keyCode === 13) {
       this.props.onLabelChange(this.state.text);
       this.changeEditing(false);
+    } else if (event.keyCode === 16) {
+      event.stopPropagation();
     }
   }
 

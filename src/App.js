@@ -11,7 +11,7 @@ class App extends Component {
     this.state = { shift: false };
   }
 
-  keyDownListener({ keyCode }) {
+  handleKeyDown({ keyCode }) {
     if (keyCode === 16) {
       this.handlePressShift();
     } else if (keyCode > 47 && keyCode < 58) {
@@ -44,8 +44,6 @@ class App extends Component {
       console.log(message.data);
       this.handleButtonsReceived(message.data);
     });
-
-    document.addEventListener('keydown', this.keyDownListener.bind(this));
   }
 
   handleLabelChange = (id, title) => {
@@ -153,7 +151,7 @@ class App extends Component {
 
   render() {
     return (
-      <div className="App">
+      <div className="App" onKeyDown={this.handleKeyDown.bind(this)} tabIndex={0}>
         <img src="devcon7_logo.svg" />
         {this.renderButtons()}
       </div>
