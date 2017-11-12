@@ -55,3 +55,14 @@
   word-wrap: break-word;
   box-shadow: 0.75ch 0 0 0 #000000, -0.75ch 0 0 0 #000000;
 }
+
+.button-label-input {
+  font-family: 'Impact Label', sans-serif;
+  background-color: #000000;
+  color: #fff;
+  font-size: 2rem;
+  text-align: center;
+  outline: 0;
+  border: none;
+  width: 260px;
+}

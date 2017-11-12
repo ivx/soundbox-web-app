@@ -49,10 +49,12 @@ class EditableLabel extends Component {
       return (
         <input
           type="text"
+          className="button-label-input"
           value={this.state.text}
           onChange={this.handleChange}
           onBlur={this.handleBlur}
           onKeyDown={this.handleKeyDown}
+          maxLength={25}
           autoFocus
         />
       );
