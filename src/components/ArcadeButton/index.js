@@ -34,7 +34,7 @@ class ArcadeButton extends Component {
 
   render() {
     const classNames = classnames('arcade-button', {
-      active: this.props.active
+      active: this.props.active,
     });
 
     return (

@@ -8,9 +8,9 @@ class App extends Component {
 
   constructor(props) {
     super(props);
-    this.state = { 
+    this.state = {
       shift: false,
-      help: false
+      help: false,
     };
   }
 
@@ -52,10 +52,10 @@ class App extends Component {
       .receive('error', response => {
         console.log('error');
       });
-    
-    this.channel.on("buttons_updated", message => 
-      this.handleButtonsReceived(message.data) 
-    )
+
+    this.channel.on('buttons_updated', message =>
+      this.handleButtonsReceived(message.data)
+    );
 
     this.channel.push('get_buttons', {}).receive('ok', message => {
       console.log(message.data);
@@ -64,11 +64,11 @@ class App extends Component {
   }
 
   handleLabelChange = (id, title) => {
-    this.channel.push('edit_button', { id, title })
-  }
+    this.channel.push('edit_button', { id, title });
+  };
 
   handleSoundUpload = (file, btn_id, btn_title) => {
-    this.channel.push('upload_sound', { id: btn_id, title: btn_title, file })
+    this.channel.push('upload_sound', { id: btn_id, title: btn_title, file });
   };
 
   handleButtonsReceived = buttons => {
@@ -78,7 +78,7 @@ class App extends Component {
       buttons[7],
       buttons[5],
       buttons[3],
-      buttons[1],
+      buttons[1]
     );
     const button_set_0_1 = [];
     button_set_0_1.push(
@@ -86,7 +86,7 @@ class App extends Component {
       buttons[6],
       buttons[4],
       buttons[2],
-      buttons[0],
+      buttons[0]
     );
     const button_set_1_0 = [];
     button_set_1_0.push(
@@ -94,7 +94,7 @@ class App extends Component {
       buttons[17],
       buttons[15],
       buttons[13],
-      buttons[11],
+      buttons[11]
     );
     const button_set_1_1 = [];
     button_set_1_1.push(
@@ -102,7 +102,7 @@ class App extends Component {
       buttons[16],
       buttons[14],
       buttons[12],
-      buttons[10],
+      buttons[10]
     );
 
     this.setState(prevState => ({
@@ -159,7 +159,7 @@ class App extends Component {
           key="btn_shift"
           active={this.state.shift}
           handlePress={this.handlePressShift}
-          label='Shift'
+          label="Shift"
           isShift
         />
         {this.renderButtonRow(row_2)}
@@ -169,9 +169,9 @@ class App extends Component {
 
   render() {
     return (
-      <div 
-        className="App" 
-        onKeyDown={this.handleKeyDown.bind(this)} 
+      <div
+        className="App"
+        onKeyDown={this.handleKeyDown.bind(this)}
         onKeyUp={this.handleKeyUp.bind(this)}
         tabIndex={0}
       >
