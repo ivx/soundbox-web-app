@@ -50,7 +50,7 @@ class ArcadeButton extends Component {
         ) : (
           <Dropzone
             disableClick
-            accept="audio/mp3"
+            accept="audio/mp3, audio/mpeg"
             onDrop={this.handleFileUpload}
             className="dropzone"
             acceptClassName="dropzone-accept"
