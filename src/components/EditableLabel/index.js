@@ -65,7 +65,7 @@ class EditableLabel extends Component {
         style={{ transform: `rotate(${this.props.labelRotation}deg)` }}
       >
         <span className="button-label">
-          {this.props.help ? this.props.btn_id % 10 : this.state.text}
+          {this.props.help ? this.props.btn_id % 10 : this.props.text}
         </span>
       </div>
     );
