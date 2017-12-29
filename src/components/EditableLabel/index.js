@@ -55,6 +55,7 @@ class EditableLabel extends Component {
           onBlur={this.handleBlur}
           onKeyDown={this.handleKeyDown}
           maxLength={25}
+          onFocus={event => event.target.select()}
           autoFocus
         />
       );
