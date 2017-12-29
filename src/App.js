@@ -6,13 +6,53 @@ import { Socket } from 'phoenix-socket';
 class App extends Component {
   channel = null;
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      shift: false,
-      help: false,
-    };
+  state = {
+    shift: false,
+    help: false,
+    buttons: null,
+  };
+
+  componentDidMount() {
+    const socket = new Socket('ws://soundbox.world.domination/socket');
+
+    socket.connect();
+
+    this.channel = socket.channel('sound:lobby', {});
+    this.channel
+      .join()
+      .receive('ok', response => {
+        console.log('joined', response);
+      })
+      .receive('error', response => {
+        console.log('error', response);
+      });
+
+    this.channel.on('buttons_updated', message => {
+      console.log('update', message.data);
+      this.handleButtonsReceived(message.data);
+    });
+
+    this.channel.push('get_buttons', {}).receive('ok', message => {
+      console.log(message.data);
+      this.handleButtonsReceived(message.data);
+    });
   }
+
+  handleButtonsReceived = buttons => {
+    this.setState(prevState => ({
+      ...prevState,
+      buttons: {
+        true: [
+          [buttons[19], buttons[17], buttons[15], buttons[13], buttons[11]],
+          [buttons[18], buttons[16], buttons[14], buttons[12], buttons[10]],
+        ],
+        false: [
+          [buttons[9], buttons[7], buttons[5], buttons[3], buttons[1]],
+          [buttons[8], buttons[6], buttons[4], buttons[2], buttons[0]],
+        ],
+      },
+    }));
+  };
 
   handleKeyDown({ keyCode }) {
     if (keyCode === 16) {
@@ -36,82 +76,12 @@ class App extends Component {
     }
   }
 
-  componentDidMount() {
-    this.setState();
-
-    const socket = new Socket('ws://soundbox.world.domination/socket');
-
-    socket.connect();
-
-    this.channel = socket.channel('sound:lobby', {});
-    this.channel
-      .join()
-      .receive('ok', response => {
-        console.log('joined', response);
-      })
-      .receive('error', response => {
-        console.log('error');
-      });
-
-    this.channel.on('buttons_updated', message =>
-      this.handleButtonsReceived(message.data)
-    );
-
-    this.channel.push('get_buttons', {}).receive('ok', message => {
-      console.log(message.data);
-      this.handleButtonsReceived(message.data);
-    });
-  }
-
   handleLabelChange = (id, title) => {
     this.channel.push('edit_button', { id, title });
   };
 
-  handleSoundUpload = (file, btn_id, btn_title) => {
-    this.channel.push('upload_sound', { id: btn_id, title: btn_title, file });
-  };
-
-  handleButtonsReceived = buttons => {
-    const button_set_0_0 = [];
-    button_set_0_0.push(
-      buttons[9],
-      buttons[7],
-      buttons[5],
-      buttons[3],
-      buttons[1]
-    );
-    const button_set_0_1 = [];
-    button_set_0_1.push(
-      buttons[8],
-      buttons[6],
-      buttons[4],
-      buttons[2],
-      buttons[0]
-    );
-    const button_set_1_0 = [];
-    button_set_1_0.push(
-      buttons[19],
-      buttons[17],
-      buttons[15],
-      buttons[13],
-      buttons[11]
-    );
-    const button_set_1_1 = [];
-    button_set_1_1.push(
-      buttons[18],
-      buttons[16],
-      buttons[14],
-      buttons[12],
-      buttons[10]
-    );
-
-    this.setState(prevState => ({
-      ...prevState,
-      button_set_0_0: button_set_0_0,
-      button_set_0_1: button_set_0_1,
-      button_set_1_0: button_set_1_0,
-      button_set_1_1: button_set_1_1,
-    }));
+  handleSoundUpload = (file, id, title) => {
+    this.channel.push('upload_sound', { id, title, file });
   };
 
   handlePressButton = id => {
@@ -125,8 +95,8 @@ class App extends Component {
     }));
   };
 
-  renderButtonRow = buttons => {
-    return buttons.map(button => (
+  renderButtonRow = buttonRow => {
+    return buttonRow.map(button => (
       <ArcadeButton
         btn_id={button.id}
         key={button.id}
@@ -140,18 +110,13 @@ class App extends Component {
   };
 
   renderButtons = () => {
-    if (!this.state.button_set_0_0) return null;
+    if (!this.state.buttons) return null;
 
-    const row_1 = this.state.shift
-      ? this.state.button_set_1_0
-      : this.state.button_set_0_0;
-    const row_2 = this.state.shift
-      ? this.state.button_set_1_1
-      : this.state.button_set_0_1;
+    const buttonRow = this.state.buttons[this.state.shift];
 
     return [
       <div className="button-row" key="button-row-1">
-        {this.renderButtonRow(row_1)}
+        {this.renderButtonRow(buttonRow[0])}
       </div>,
       <div className="button-row" key="button-row-2">
         <ArcadeButton
@@ -162,7 +127,7 @@ class App extends Component {
           label="Shift"
           isShift
         />
-        {this.renderButtonRow(row_2)}
+        {this.renderButtonRow(buttonRow[1])}
       </div>,
     ];
   };
